@@ -1,5 +1,5 @@
 "use client";
-
+import Image from "next/image";
 import {
   Eye,
   EyeOff,
@@ -125,8 +125,15 @@ export default function AdminLoginPage() {
         />
 
         <div className="relative flex items-center gap-3">
-          <span className="grid size-12 place-items-center rounded-2xl bg-[#d7e86a] text-[#123c34]">
-            <Leaf className="size-6" />
+          <span className="relative block size-14 shrink-0 overflow-hidden">
+            <Image
+              src="/images/logo.png"
+              alt="Logo SIWATU Alas Watu Kebonan"
+              fill
+              priority
+              sizes="56px"
+              className="object-contain"
+            />
           </span>
 
           <div>
