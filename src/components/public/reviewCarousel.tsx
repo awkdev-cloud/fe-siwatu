@@ -19,8 +19,35 @@ function cn(...classes: Array<string | false | null | undefined>) {
   return classes.filter(Boolean).join(" ");
 }
 
+const fallbackReviews: Review[] = [
+  {
+    id: 1,
+    name: "Pengunjung",
+    initial: "P",
+    rating: 5,
+    message:
+      "Tempatnya nyaman, suasananya asri, dan cocok untuk menikmati wisata alam bersama keluarga.",
+  },
+  {
+    id: 2,
+    name: "Wisatawan",
+    initial: "W",
+    rating: 5,
+    message:
+      "Informasi wisata mudah dipahami. Katalog flora dan bebatuan juga menarik untuk edukasi.",
+  },
+  {
+    id: 3,
+    name: "Tamu Desa",
+    initial: "TD",
+    rating: 5,
+    message:
+      "Pengalaman berkunjung terasa menyenangkan karena tempatnya unik dan punya identitas lokal yang kuat.",
+  },
+];
+
 function ReviewStars({ value = 5 }: { value?: number }) {
-  const safeValue = Math.max(0, Math.min(5, value));
+  const safeValue = Math.max(0, Math.min(5, Math.round(value)));
 
   return (
     <div className="flex items-center gap-1 text-[#FBD90F]">
@@ -34,35 +61,12 @@ function ReviewStars({ value = 5 }: { value?: number }) {
 }
 
 export default function ReviewCarousel({ reviews }: ReviewCarouselProps) {
-  const fallbackReviews: Review[] = [
-    {
-      id: 1,
-      name: "Pengunjung",
-      initial: "P",
-      rating: 5,
-      message:
-        "Tempatnya nyaman, suasananya asri, dan cocok untuk menikmati wisata alam bersama keluarga.",
-    },
-    {
-      id: 2,
-      name: "Wisatawan",
-      initial: "W",
-      rating: 5,
-      message:
-        "Informasi wisata mudah dipahami. Katalog flora dan bebatuan juga menarik untuk edukasi.",
-    },
-    {
-      id: 3,
-      name: "Tamu Desa",
-      initial: "TD",
-      rating: 5,
-      message:
-        "Pengalaman berkunjung terasa menyenangkan karena tempatnya unik dan punya identitas lokal yang kuat.",
-    },
-  ];
-
-  const data = reviews.length > 0 ? reviews : fallbackReviews;
   const [activeIndex, setActiveIndex] = useState(0);
+  const [isMounted, setIsMounted] = useState(false);
+
+  const data = useMemo(() => {
+    return reviews.length > 0 ? reviews : fallbackReviews;
+  }, [reviews]);
 
   const visibleReviews = useMemo(() => {
     return Array.from({ length: Math.min(3, data.length) }).map(
@@ -71,14 +75,19 @@ export default function ReviewCarousel({ reviews }: ReviewCarouselProps) {
   }, [activeIndex, data]);
 
   useEffect(() => {
+    setIsMounted(true);
+  }, []);
+
+  useEffect(() => {
+    if (!isMounted) return;
     if (data.length <= 3) return;
 
-    const timer = setInterval(() => {
+    const timer = window.setInterval(() => {
       setActiveIndex((prev) => (prev + 1) % data.length);
     }, 5000);
 
-    return () => clearInterval(timer);
-  }, [data.length]);
+    return () => window.clearInterval(timer);
+  }, [isMounted, data.length]);
 
   const handlePrev = () => {
     setActiveIndex((prev) => (prev - 1 + data.length) % data.length);
@@ -94,9 +103,7 @@ export default function ReviewCarousel({ reviews }: ReviewCarouselProps) {
         {visibleReviews.map((review, index) => (
           <article
             key={`${review.id}-${index}`}
-            className={cn(
-              "group relative min-h-[260px] overflow-hidden rounded-[30px] border border-[#00532B]/10 bg-white p-6 shadow-lg shadow-[#00532B]/5 transition-all duration-500 hover:-translate-y-2 hover:shadow-2xl hover:shadow-[#00532B]/15",
-            )}
+            className="group relative min-h-[260px] overflow-hidden rounded-[30px] border border-[#00532B]/10 bg-white p-6 shadow-lg shadow-[#00532B]/5 transition-all duration-500 hover:-translate-y-2 hover:shadow-2xl hover:shadow-[#00532B]/15"
           >
             <div className="absolute -right-8 -top-8 h-24 w-24 rounded-full bg-[#FBD90F]/20 blur-2xl transition group-hover:bg-[#FBD90F]/35" />
 

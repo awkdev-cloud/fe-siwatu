@@ -1,21 +1,22 @@
-import type { Metadata } from "next";
-import "./globals.css";
-import LayoutNavbar from "@/components/public/layoutNavbar";
+import type { ReactNode } from "react";
 
-export const metadata: Metadata = {
-  title: "Siwatu | Alas Watu Kebonan",
-  description: "Website desa wisata Alas Watu Kebonan.",
+import RouteLayout from "@/components/layout/route-layout";
+
+import "./globals.css";
+
+type RootLayoutProps = {
+  children: ReactNode;
 };
 
 export default function RootLayout({
   children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+}: RootLayoutProps) {
   return (
     <html lang="id">
-      <body>
-        <LayoutNavbar>{children}</LayoutNavbar>
+      <body className="min-h-dvh bg-white text-neutral-900 antialiased">
+        <RouteLayout>
+          {children}
+        </RouteLayout>
       </body>
     </html>
   );

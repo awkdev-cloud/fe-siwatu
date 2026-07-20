@@ -29,12 +29,12 @@ export default function Header({ whatsappLink }: HeaderProps) {
 
   const mobileMenus = [
     { label: "Beranda", href: "/" },
-    { label: "Galeri", href: "/#gallery" },
-    { label: "Paket Wisata", href: "/#packages" },
-    { label: "Katalog Flora", href: "/#flora" },
-    { label: "Bebatuan Unik", href: "/#rocks" },
-    { label: "Tentang", href: "/#about" },
-    { label: "Kontak", href: "/#contact" },
+    { label: "Galeri", href: "/galleries" },
+    { label: "Paket Wisata", href: "/packages" },
+    { label: "Katalog Flora", href: "/plant-revitalizations" },
+    { label: "Bebatuan Unik", href: "/unique-rocks" },
+    { label: "Tentang", href: "/about" },
+    { label: "Kontak", href: "/contact" },
   ];
 
   return (
