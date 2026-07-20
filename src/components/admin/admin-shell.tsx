@@ -139,13 +139,53 @@ export default function AdminShell({
   );
 
   async function logout() {
+    if (loggingOut) {
+      return;
+    }
+
     setLoggingOut(true);
 
     try {
-      await fetch("//admin/logout", { method: "POST" });
+      const response = await fetch(
+        "/api/admin/auth/logout",
+        {
+          method: "POST",
+          cache: "no-store",
+          credentials: "same-origin",
+          headers: {
+            Accept: "application/json",
+          },
+        },
+      );
+
+      if (!response.ok) {
+        const payload = (await response
+          .json()
+          .catch(() => null)) as {
+          message?: string;
+        } | null;
+
+        console.error(
+          payload?.message ?? "Request logout gagal.",
+        );
+      }
+    } catch (error) {
+      /*
+      * Jangan biarkan error fetch menjadi
+      * unhandledRejection.
+      */
+      console.error(
+        "Logout request error:",
+        error instanceof Error
+          ? error.message
+          : error,
+      );
     } finally {
-      router.replace("/admin/login");
-      router.refresh();
+      /*
+      * Lakukan full navigation agar state dan cache
+      * halaman admin benar-benar dibersihkan.
+      */
+      window.location.replace("/admin/login");
     }
   }
 

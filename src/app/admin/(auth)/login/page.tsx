@@ -185,7 +185,7 @@ export default function AdminLoginPage() {
               Selamat datang
             </p>
 
-            <h2 className="mt-3 text-3xl font-bold tracking-[-0.035em]">
+            <h2 className="mt-3 text-3xl font-bold tracking-[-0.035em] text-[#123c34]">
               Masuk sebagai admin
             </h2>
 
@@ -217,7 +217,7 @@ export default function AdminLoginPage() {
                     setEmail(event.target.value)
                   }
                   placeholder="admin@siwatu.com"
-                  className="h-12 w-full rounded-xl border border-neutral-200 bg-neutral-50 pl-11 pr-4 text-sm outline-none transition focus:border-[#719585] focus:bg-white focus:ring-4 focus:ring-[#e1ebe6] disabled:cursor-not-allowed disabled:opacity-60"
+                  className="h-12 w-full rounded-xl border border-neutral-200 bg-neutral-50 pl-11 pr-4 text-sm outline-none transition text-[#123c34] focus:border-[#719585] focus:bg-white focus:ring-4 focus:ring-[#e1ebe6] disabled:cursor-not-allowed disabled:opacity-60"
                 />
               </span>
             </label>
@@ -244,7 +244,7 @@ export default function AdminLoginPage() {
                     setPassword(event.target.value)
                   }
                   placeholder="Masukkan password"
-                  className="h-12 w-full rounded-xl border border-neutral-200 bg-neutral-50 pl-11 pr-12 text-sm outline-none transition focus:border-[#719585] focus:bg-white focus:ring-4 focus:ring-[#e1ebe6] disabled:cursor-not-allowed disabled:opacity-60"
+                  className="h-12 w-full rounded-xl border border-neutral-200 bg-neutral-50 pl-11 pr-12 text-sm outline-none transition text-[#123c34] focus:border-[#719585] focus:bg-white focus:ring-4 focus:ring-[#e1ebe6] disabled:cursor-not-allowed disabled:opacity-60"
                 />
 
                 <button
