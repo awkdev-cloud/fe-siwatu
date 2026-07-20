@@ -9,5 +9,9 @@ type PublicLayoutProps = {
 export default function PublicLayout({
   children,
 }: PublicLayoutProps) {
-  return <LayoutNavbar>{children}</LayoutNavbar>;
+  return (
+    <LayoutNavbar>
+      {children}
+    </LayoutNavbar>
+  );
 }

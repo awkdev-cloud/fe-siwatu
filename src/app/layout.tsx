@@ -1,23 +1,20 @@
-import type { ReactNode } from "react";
-
-import RouteLayout from "@/components/layout/route-layout";
+import type { Metadata } from "next";
 
 import "./globals.css";
 
-type RootLayoutProps = {
-  children: ReactNode;
+export const metadata: Metadata = {
+  title: "Siwatu | Alas Watu Kebonan",
+  description: "Website desa wisata Alas Watu Kebonan.",
 };
 
 export default function RootLayout({
   children,
-}: RootLayoutProps) {
+}: Readonly<{
+  children: React.ReactNode;
+}>) {
   return (
     <html lang="id">
-      <body className="min-h-dvh bg-white text-neutral-900 antialiased">
-        <RouteLayout>
-          {children}
-        </RouteLayout>
-      </body>
+      <body>{children}</body>
     </html>
   );
 }
